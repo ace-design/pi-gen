@@ -25,6 +25,17 @@ EOF
 			fi
 			log "End ${SUB_STAGE_DIR}/${i}-packages-nr"
 		fi
+		if [ -f "${i}-packages-au" ]; then
+			log "Begin ${SUB_STAGE_DIR}/${i}-packages-au"
+			PACKAGES="$(sed -f "${SCRIPT_DIR}/remove-comments.sed" < "${i}-packages-au")"
+			if [ -n "$PACKAGES" ]; then
+				on_chroot << EOF
+apt-get install --allow-unauthenticated -y $PACKAGES
+EOF
+			fi
+			log "End ${SUB_STAGE_DIR}/${i}-packages-au"
+		fi
+				
 		if [ -f "${i}-packages" ]; then
 			log "Begin ${SUB_STAGE_DIR}/${i}-packages"
 			PACKAGES="$(sed -f "${SCRIPT_DIR}/remove-comments.sed" < "${i}-packages")"

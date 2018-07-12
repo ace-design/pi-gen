@@ -1,0 +1,1 @@
+./geth --rpc --ipcpath /tmp/geth.ipc --rpcport 8080 --rpccorsdomain "*" --datadir data_iot --port 30303 --rpcapi "db,eth,net,web3,personal" --networkid 555 console
